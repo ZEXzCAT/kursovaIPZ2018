@@ -106,7 +106,8 @@ function addUser(event) {
             'fullname': $('#addUser fieldset input#inputUserFullname').val(),
             'age': $('#addUser fieldset input#inputUserAge').val(),
             'location': $('#addUser fieldset input#inputUserLocation').val(),
-            'gender': $('#addUser fieldset input#inputUserGender').val()
+            'gender': $('#addUser fieldset input#inputUserGender').val(),
+            'status': 'user'
         }
 
         // Use AJAX to post the object to our adduser service
@@ -153,14 +154,13 @@ function Login(event) {
     // For each item in our JSON, add a table row and cells to the content string
     $.each(data, function() {
       if ((this.username == username) && (this.password == password)) {
-        $.ajax({
-          type: 'POST',
-          data: {'username': this.username},
-          url: 'login/setcookie',
-          dataType: 'JSON'
-        }).done();
         document.cookie = "username=" + this.username;
-        window.location = "/";
+        if (this.status == "user") {
+          window.location = "/";
+        }
+        else if (this.status == "admin") {
+          window.location = "/bid";
+        }
         console.log('ura');
       }
     });
