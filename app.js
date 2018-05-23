@@ -11,6 +11,7 @@ var monk = require('monk');
 var db = monk('localhost:27017/autoservice');
 
 var routes = require('./routes/index');
+//var routes = require('./routes/home');
 var users = require('./routes/users');
 var registration = require('./routes/registration');
 var login = require('./routes/login');
