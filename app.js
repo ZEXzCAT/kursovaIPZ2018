@@ -10,8 +10,8 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/autoservice');
 
-var routes = require('./routes/index');
-//var routes = require('./routes/home');
+//var routes = require('./routes/index');
+var home = require('./routes/home');
 var users = require('./routes/users');
 var registration = require('./routes/registration');
 var login = require('./routes/login');
@@ -40,8 +40,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', routes);
-app.use('/home', routes);
+app.use('/', home);
+//app.use('/home', home);
+/*app.get('/home', function(req, res) {
+  res.sendFile(path.join(__dirname+'/views/home.html'));
+});*/
 app.use('/users', users);
 app.use('/registration', registration);
 app.use('/login', login);

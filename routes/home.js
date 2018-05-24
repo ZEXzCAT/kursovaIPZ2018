@@ -3,10 +3,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  if (req.cookies != null) {
+  res.render('home');
+  /*res.render('../views/_home', function(err, html) {
+    res.send(html);
+  });*/
+  /*if (req.cookies == null) {
     res.render('home');
   }
-  /*if (req.cookies.status == "user") {
+  if (req.cookies.status == "user") {
     res.render('bid', {
       title: 'Express'
     });
@@ -15,6 +19,7 @@ router.get('/', function(req, res) {
       title: 'Express'
     });
   }*/
+  //res.sendFile(path.join(__dirname+'/views/home.html'));
 });
 
 module.exports = router;
