@@ -5,19 +5,19 @@ var router = express.Router();
 router.get('/', function(req, res) {
   //res.render('home');
   if (req.cookies.status == '') {
-    res.render('home');
+    res.render('services');
   } else if (req.cookies.status == 'admin') {
-    res.render('homeA', {
+    res.render('servicesA', {
       user: req.cookies.username
     });
   }
   else if (req.cookies.status == 'user') {
-    res.render('homeU', {
+    res.render('servicesU', {
       user: req.cookies.username
     });
   }
   else if (req.cookies.status == 'worker') {
-    res.render('homeW', {
+    res.render('servicesW', {
       user: req.cookies.username
     });
   }

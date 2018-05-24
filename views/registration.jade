@@ -1,29 +1,59 @@
-extends layout
+html
+ head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
 
-block content
-    h1= title
-    p Welcome to our test
-
-    // Wrapper
-    #wrapper
-
-        // ADD USER
-        h2 Add User
-        #addUser
-            fieldset
-                input#inputUserName(type='text', placeholder='Username')
-                input#inputUserEmail(type='text', placeholder='Email')
-                br
-                input#inputUserNumber(type='text', placeholder='UserNumber')
-                input#inputUserPassword(type='text', placeholder='Password')
-                br
-                input#inputUserFullname(type='text', placeholder='Full Name')
-                input#inputUserAge(type='text', placeholder='Age')
-                br
-                input#inputUserLocation(type='text', placeholder='Location')
-                input#inputUserGender(type='text', placeholder='gender')
-                br
-                button#btnAddUser Add User
-        // /ADD USER
-
-    // /WRAPPER
+  link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+  link(rel='stylesheet', href='/stylesheets/fonts-v3.css')
+  link(rel='stylesheet', href='/stylesheets/base-v4.css')
+  link(rel='stylesheet', href='/stylesheets/properties-2ccb5153-0dea-3ed1-d660-9ddc66ac02f8.css')
+ body
+  #_228
+   #_229.nm-label
+    h1#_230
+     | AutoService
+     br
+   i#_231
+    | 
+   nav#_232.navbar.navbar-default(role='navigation')
+    .container-fluid
+     ul.nav.navbar-nav
+      li
+       a#_233.navbar-brand(href='#') Brand
+      li
+       a#_234(href='#') Home
+      li
+       a#_235(href='#') Services
+   #_237.nm-label
+    h2#_238
+     | REGISTRAITION
+     br
+   button#_239.btn.btn-default
+    | Send
+   input#_240_1.form-control(type='text', placeholder='Text input')
+   input#_240.form-control(type='text', placeholder='Text input')
+   input#_241.form-control(type='text', placeholder='Text input')
+   input#_242.form-control(type='text', placeholder='Text input')
+   input#_243.form-control(type='text', placeholder='Text input')
+   #_244_1.nm-label
+    span#_245_1
+     | Username
+     br
+   #_244.nm-label
+    span#_245
+     | Email
+     br
+   #_246.nm-label
+    span#_247
+     | Password
+     br
+   #_248.nm-label
+    span#_249
+     | Number
+     br
+   #_250.nm-label
+    span#_251
+     | PIB
+     br
+     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+     script(src='/javascripts/forregistration.js')

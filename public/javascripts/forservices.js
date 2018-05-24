@@ -1,21 +1,21 @@
 $(document).ready(function() {
   // Home
-  $('#_7').on('click', goHome);
+  $('#_21').on('click', goHome);
 
   // Services
-  $('#_8').on('click', goServices);
+  $('#_22').on('click', goServices);
 
   // Bids
-  $('#_8_1').on('click', goBids);
+  $('#_22_1').on('click', goBids);
 
   // login
-  $('#_9').on('click', goLogin);
+  $('#_23').on('click', goLogin);
 
   // Registration
-  $('#_10').on('click', goRegistration);
+  $('#_24').on('click', goRegistration);
 
   // log out
-  $('#_10_1').on('click', goLogout);
+  $('#_24_1').on('click', goLogout);
 
 });
 
