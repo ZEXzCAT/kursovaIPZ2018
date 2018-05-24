@@ -1,9 +1,17 @@
 $(document).ready(function() {
 
+  // Home
+  $('#_258').on('click', goHome);
+
   // login
   $('#_276').on('click', Login);
 
 });
+
+function goHome(event) {
+  event.preventDefault();
+  window.location = "/";
+}
 
 function Login(event) {
   event.preventDefault();
