@@ -41,7 +41,7 @@ function goLogout(event) {
 function goSendForm(event) {
   event.preventDefault();
   var newBid = {
-    'username': $('#_116_1').val(),
+    'username': get_cookie("username"),
     'service': $('#_116').val(),
     'car': $('#_117').val(),
     'time': $('#_118').val(),
@@ -55,4 +55,13 @@ function goSendForm(event) {
     dataType: 'JSON'
   }).done();
   window.location = "/bids";
+}
+
+function get_cookie(cookie_name) {
+  var results = document.cookie.match('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
+
+  if (results)
+    return (unescape(results[2]));
+  else
+    return null;
 }

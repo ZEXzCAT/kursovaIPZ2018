@@ -4,22 +4,19 @@ $(document).ready(function() {
   populateServiceTable();
 
   // Home
-  $('#_21').on('click', goHome);
+  $('#_126').on('click', goHome);
 
   // Services
-  $('#_22').on('click', goServices);
+  $('#_127').on('click', goServices);
 
   // Bids
-  $('#_22_1').on('click', goBids);
-
-  // login
-  $('#_23').on('click', goLogin);
-
-  // Registration
-  $('#_24').on('click', goRegistration);
+  $('#_128').on('click', goBids);
 
   // log out
-  $('#_24_1').on('click', goLogout);
+  $('#_129').on('click', goLogout);
+
+  // bidform
+  $('#_131').on('click', goBidform);
 
 });
 
@@ -30,20 +27,22 @@ function populateServiceTable() {
   var tableContent = '';
 
   // jQuery AJAX call for JSON
-  $.getJSON('/services/serviceslist', function(data) {
+  $.getJSON('/bid/bidlist', function(data) {
 
     // For each item in our JSON, add a table row and cells to the content string
     $.each(data, function() {
-      tableContent += '<tr>';
-      tableContent += '<td>' + this.servicename + '</td>';
-      tableContent += '<td>' + this.review + '</td>';
-      tableContent += '<td>' + this.time + '</td>';
-      tableContent += '<td>' + this.price + '</td>';
-      tableContent += '</tr>';
+      if (this.status == "прийнято") {
+        tableContent += '<tr>';
+        tableContent += '<td>' + this._id + '</td>';
+        tableContent += '<td>' + this.service + '</td>';
+        tableContent += '<td>' + this.car + '</td>';
+        tableContent += '<td>' + this.time + '</td>';
+        tableContent += '</tr>';
+      }
     });
 
     // Inject the whole content string into our existing HTML table
-    $('#_25 tbody').html(tableContent);
+    $('#_132 tbody').html(tableContent);
   });
 };
 
@@ -62,11 +61,6 @@ function goBids(event) {
   window.location = "/bids";
 }
 
-function goLogin(event) {
-  event.preventDefault();
-  window.location = "/login";
-}
-
 function goLogout(event) {
   event.preventDefault();
   document.cookie = "username=" + '';
@@ -74,7 +68,16 @@ function goLogout(event) {
   window.location = "/";
 }
 
-function goRegistration(event) {
+function goBidform(event) {
   event.preventDefault();
-  window.location = "/registration";
+  window.location = "/bids/bidform";
+}
+
+function get_cookie(cookie_name) {
+  var results = document.cookie.match('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
+
+  if (results)
+    return (unescape(results[2]));
+  else
+    return null;
 }

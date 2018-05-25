@@ -1,12 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+router.get('/serviceslist', function(req, res) {
+    var db = req.db;
+    var collection = db.get('services');
+    collection.find({},{},function(e,docs){
+        res.json(docs);
+    });
+});
+
+/* GET page. */
 router.get('/', function(req, res) {
-  //res.render('home');
-  if (req.cookies.status == '') {
-    res.render('services');
-  } else if (req.cookies.status == 'admin') {
+  if (req.cookies.status == 'admin') {
     res.render('servicesA', {
       user: req.cookies.username
     });
@@ -20,6 +25,8 @@ router.get('/', function(req, res) {
     res.render('servicesW', {
       user: req.cookies.username
     });
+  } else {
+    res.render('services');
   }
 });
 

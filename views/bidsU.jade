@@ -2,40 +2,43 @@ html
  head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-
+  
   link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
   link(rel='stylesheet', href='/stylesheets/fonts-v3.css')
   link(rel='stylesheet', href='/stylesheets/base-v4.css')
   link(rel='stylesheet', href='/stylesheets/properties-2ccb5153-0dea-3ed1-d660-9ddc66ac02f8.css')
  body
-  #_15
-   #_16.nm-label
-    h1#_17
+  #_53
+   #_54.nm-label
+    h1#_55
      | AutoService
      br
-   i#_18
+   i#_56
     | 
-   nav#_19.navbar.navbar-default(role='navigation')
+   nav#_57.navbar.navbar-default(role='navigation')
     .container-fluid
      ul.nav.navbar-nav
       li
-       a#_20.navbar-brand(href='#') Brand
+       a#_58.navbar-brand(href='#') Brand
       li
-       a#_21(href='#') Home
+       a#_59(href='#') Home
+      li
+       a#_60(href='#') Services
       li.active
-       a#_22(href='#') Services
-       li
-         a#_22_1(href='#') Zayavki
-       label#_23_1.nm-label
-        | #{user}
-       button#_24_1.btn.btn-default
+       a#_61(href='#') Zayavki
+       label#_62.nm-label
+        | "#{user}"
+       button#_62_1.btn.btn-default
          | Log out
-   table#_25
+   button#_64.btn.btn-default
+    | Podat zayavky
+   table#_65
     thead
-     th Назва послуги
-     th Опис
-     th Час виконання
-     th Ціна
+      th Номер заявки
+      th Назва послуги
+      th Машина
+      th Статус
+      th Пояснення
     tbody
      script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
-     script(src='/javascripts/forservices.js')
+     script(src='/javascripts/forbidsU.js')

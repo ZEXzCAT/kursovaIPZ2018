@@ -3,23 +3,20 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  //res.render('home');
-  if (req.cookies.status == '') {
-    res.render('home');
-  } else if (req.cookies.status == 'admin') {
+  if (req.cookies.status == 'admin') {
     res.render('homeA', {
       user: req.cookies.username
     });
-  }
-  else if (req.cookies.status == 'user') {
+  } else if (req.cookies.status == 'user') {
     res.render('homeU', {
       user: req.cookies.username
     });
-  }
-  else if (req.cookies.status == 'worker') {
+  } else if (req.cookies.status == 'worker') {
     res.render('homeW', {
       user: req.cookies.username
     });
+  } else {
+    res.render('home');
   }
 });
 
