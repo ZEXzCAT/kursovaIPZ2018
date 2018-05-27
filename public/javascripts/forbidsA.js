@@ -71,6 +71,7 @@ function Accept(event) {
     data: newData,
     url: '/bid/updatebid/' + $('#_223').val(),
   }).done();
+  alert("Заявку прийнято");
   window.location = "/bids";
 }
 
@@ -86,10 +87,12 @@ function Cancel(event) {
     data: newData,
     url: '/bid/updatebid/' + $('#_223').val(),
   }).done();
+
+  alert("Заявку відхтлено");
   window.location = "/bids";
 }
 
-/*function Report(event) {
+function Report(event) {
   event.preventDefault();
   var Content = "";
 
@@ -112,13 +115,14 @@ function Cancel(event) {
       url: '/bid/report', //+ $('#_223').val(),
       dataType: 'TXT'
     }).done();
+    alert();
     window.location = "/bids";
   });
-});
+}
 
 function Check(event) {
 
-});*/
+}
 
 function goHome(event) {
   event.preventDefault();

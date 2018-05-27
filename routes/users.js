@@ -16,6 +16,8 @@ router.get('/userlist', function(req, res) {
  * POST to adduser.
  */
 router.post('/adduser', function(req, res) {
+  //console.log(req.body);
+
     var db = req.db;
     var collection = db.get('userlist');
     collection.insert(req.body, function(err, result){

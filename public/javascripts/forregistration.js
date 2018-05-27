@@ -24,12 +24,13 @@ function goRegistrate(event) {
   event.preventDefault();
   var newUser = {
     'username': $('#_240_1').val(),
-    'email': $('#_240').val(),
-    'password': $('#_241').val(),
+    'email': $('#_241').val(),
+    'password': $('#_243').val(),
     'number': $('#_242').val(),
-    'fullname': $('#_243').val(),
+    'fullname': $('#_240').val(),
     'status': 'user'
   }
+    console.log(newUser);
   // Use AJAX to post the object to our adduser service
   $.ajax({
     type: 'POST',
@@ -37,6 +38,7 @@ function goRegistrate(event) {
     url: '/users/adduser',
     dataType: 'JSON'
   }).done();
+  alert("Реєстрація успішна");
   document.cookie = "username=" + $('#_240_1').val();
   document.cookie = "status=" + "user";
   window.location = "/";

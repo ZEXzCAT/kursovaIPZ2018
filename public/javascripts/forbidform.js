@@ -54,5 +54,6 @@ function goSendForm(event) {
     url: '/bid/addBid',
     dataType: 'JSON'
   }).done();
+  alert("Заявку відправлено");
   window.location = "/bids";
 }

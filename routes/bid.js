@@ -22,6 +22,7 @@ router.get('/bidlist', function(req, res) {
  * POST to addbid.
  */
 router.post('/addbid', function(req, res) {
+  console.log(req.body);
   var db = req.db;
   var collection = db.get('bidlist');
   collection.insert(req.body, function(err, result) {
