@@ -47,8 +47,10 @@ function populateBidsTable() {
         tableContent += '<tr>';
         tableContent += '<td>' + this._id + '</td>';
         tableContent += '<td>' + this.username + '</td>';
+        tableContent += '<td>' + this.reason + '</td>';
         tableContent += '<td>' + this.service + '</td>';
         tableContent += '<td>' + this.car + '</td>';
+        tableContent += '<td>' + this.date + '</td>';
         tableContent += '<td>' + this.time + '</td>';
         tableContent += '<td>' + this.status + '</td>';
         tableContent += '</tr>';
@@ -72,7 +74,8 @@ function Accept(event) {
     url: '/bid/updatebid/' + $('#_223').val(),
   }).done();
   alert("Заявку прийнято");
-  window.location = "/bids";
+  populateBidsTable();
+  $('#_223').val('');
 }
 
 function Cancel(event) {
@@ -88,14 +91,14 @@ function Cancel(event) {
     url: '/bid/updatebid/' + $('#_223').val(),
   }).done();
 
-  alert("Заявку відхтлено");
-  window.location = "/bids";
+  alert("Заявку відхилено");
+  populateBidsTable();
+  $('#_223').val('');
 }
 
 function Report(event) {
   event.preventDefault();
   var Content = "";
-
   // jQuery AJAX call for JSON
   $.getJSON('/bid/bidlist', function(data) {
 
@@ -103,25 +106,82 @@ function Report(event) {
     $.each(data, function() {
       Content += this._id + ' ';
       Content += this.username + ' ';
+      Content += this.reason + ' ';
       Content += this.service + ' ';
       Content += this.car + ' ';
+      Content += this.date + ' ';
       Content += this.time + ' ';
       Content += this.status + '\n';
     });
+    var contentlist = {
+      'data': Content
+    }
     // Use AJAX to post the object to our adduser service
     $.ajax({
       type: 'POST',
-      data: Content,
+      data: contentlist,
       url: '/bid/report', //+ $('#_223').val(),
-      dataType: 'TXT'
+      dataType: 'JSON'
     }).done();
-    alert();
-    window.location = "/bids";
+    alert("Звіт створено.");
   });
 }
 
 function Check(event) {
+  event.preventDefault();
+  var serviceListData = [];
+  var userListData = [];
+  var Content = "";
+  $.getJSON('/services/serviceslist', function(data) {
+    serviceListData = data;
+  });
+  $.getJSON('/users/userlist', function(data) {
+    userListData = data;
+  });
+  // jQuery AJAX call for JSON
+  $.getJSON('/bid/bidlist', function(data) {
 
+    // For each item in our JSON, add a table row and cells to the content string
+    $.each(data, function() {
+      var name = this.username;
+      var serv = this.service;
+      var fullname = '';
+      var price = '';
+      if (this._id == $('#_223').val()) {
+        $.each(serviceListData, function() {
+          if ((this.service) == serv) {
+            price = this.price;
+          }
+        });
+        $.each(userListData, function() {
+          if ((this.username) == name) {
+            fullname = this.fullname;
+            if (this.reqcount >= 3)
+              price -= parseInt(price) * 0.1;
+          }
+        });
+        Content += fullname + ' ';
+        Content += this.reason + ' ';
+        Content += this.service + ' ';
+        Content += this.car + ' ';
+        Content += this.date + ' ';
+        Content += this.time + ' ';
+        Content += price + '\n';
+      }
+    });
+    var contentlist = {
+      'data': Content
+    }
+    // Use AJAX to post the object to our adduser service
+    $.ajax({
+      type: 'POST',
+      data: contentlist,
+      url: '/bid/check', //+ $('#_223').val(),
+      dataType: 'JSON'
+    }).done();
+    alert("Чек створено.");
+    $('#_223').val('');
+  });
 }
 
 function goHome(event) {

@@ -27,6 +27,26 @@ router.post('/adduser', function(req, res) {
     });
 });
 
+router.put('/updateuser/:id', function(req, res) {
+  //console.log(req.params.id);
+  var db = req.db;
+  var collection = db.get('userlist');
+  var id = req.params.id;
+  collection.update({
+    '_id': id
+  }, {
+    $set: req.body
+  }, function(err, result) {
+    res.send(
+      (err === null) ? {
+        msg: ''
+      } : {
+        msg: err
+      }
+    );
+  });
+});
+
 /*
  * DELETE to deleteuser.
  */

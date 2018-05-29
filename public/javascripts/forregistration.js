@@ -28,7 +28,9 @@ function goRegistrate(event) {
     'password': $('#_243').val(),
     'number': $('#_242').val(),
     'fullname': $('#_240').val(),
-    'status': 'user'
+    'address': $('#_243_1').val(),
+    'status': 'user',
+    'reqcount': 0
   }
     console.log(newUser);
   // Use AJAX to post the object to our adduser service

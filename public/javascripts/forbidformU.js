@@ -40,13 +40,29 @@ function goLogout(event) {
 
 function goSendForm(event) {
   event.preventDefault();
+
   var newBid = {
     'username': get_cookie("username"),
-    'service': $('#_116').val(),
+    'reason': $('#_116').val(),
     'car': $('#_117').val(),
     'time': $('#_118').val(),
     'status': 'очікується'
   }
+  $.getJSON('/users/userlist', function(data) {
+    $.each(data, function() {
+      if (this.username == get_cookie("username")) {
+        var newData = {
+          'reqcount': parseInt(this.reqcount) + 1
+        }
+        // Use AJAX to post the object to our adduser service
+        $.ajax({
+          type: 'PUT',
+          data: newData,
+          url: '/users/updateuser/' + this._id,
+        }).done();
+      }
+    });
+  });
   // Use AJAX to post the object to our adduser service
   $.ajax({
     type: 'POST',
