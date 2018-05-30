@@ -129,44 +129,39 @@ function Report(event) {
 
 function Check(event) {
   event.preventDefault();
-  var serviceListData = [];
-  var userListData = [];
   var Content = "";
-  $.getJSON('/services/serviceslist', function(data) {
-    serviceListData = data;
-  });
-  $.getJSON('/users/userlist', function(data) {
-    userListData = data;
-  });
-  // jQuery AJAX call for JSON
-  $.getJSON('/bid/bidlist', function(data) {
-
-    // For each item in our JSON, add a table row and cells to the content string
-    $.each(data, function() {
-      var name = this.username;
-      var serv = this.service;
-      var fullname = '';
-      var price = '';
+  var name = "";
+  var serv = "";
+  var price = "";
+  var fullname = "";
+  $.when($.getJSON('/bid/bidlist'), $.getJSON('/services/serviceslist'), $.getJSON('/users/userlist')).done(function(data1, data2, data3) {
+    $.each(data1[0], function() {
       if (this._id == $('#_223').val()) {
-        $.each(serviceListData, function() {
-          if ((this.service) == serv) {
-            price = this.price;
-          }
-        });
-        $.each(userListData, function() {
-          if ((this.username) == name) {
-            fullname = this.fullname;
-            if (this.reqcount >= 3)
-              price -= parseInt(price) * 0.1;
-          }
-        });
+        name = this.username;
+        serv = this.service;
+      }
+    });
+    $.each(data2[0], function() {
+      if (this.servicename == serv) {
+        price = this.price;
+      }
+    });
+    $.each(data3[0], function() {
+      if (this.username == name) {
+        fullname = this.fullname;
+        if (this.reqcount >= 3)
+        price = parseInt(price) * 0.9;
+      }
+    });
+    $.each(data1[0], function() {
+      if (this._id == $('#_223').val()) {
         Content += fullname + ' ';
         Content += this.reason + ' ';
         Content += this.service + ' ';
         Content += this.car + ' ';
         Content += this.date + ' ';
         Content += this.time + ' ';
-        Content += price + '\n';
+        Content += price + 'грн' + '\n';
       }
     });
     var contentlist = {
@@ -181,6 +176,9 @@ function Check(event) {
     }).done();
     alert("Чек створено.");
     $('#_223').val('');
+    //console.log(data1[0]); //result1 is an array of the response values from test1
+    //console.log(contentlist);
+    //console.log(price);
   });
 }
 
